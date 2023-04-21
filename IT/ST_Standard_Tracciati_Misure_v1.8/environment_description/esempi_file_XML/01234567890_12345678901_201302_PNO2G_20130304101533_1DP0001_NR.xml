@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FlussoMisure xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" CodFlusso="PNO2G">
+  <IdentificativiFlusso>
+    <PIvaUtente>12345678901</PIvaUtente>
+    <PIvaDistributore>01234567890</PIvaDistributore>
+    <CodContrDisp>DP0001</CodContrDisp>    
+  </IdentificativiFlusso>
+  <DatiPod>
+    <Pod>IT999E00000003</Pod>
+    <DataMisura>12/02/2013</DataMisura>
+    <DatiPdp>
+      <Trattamento>F</Trattamento>
+      <Tensione>400</Tensione>
+      <Forfait>NO</Forfait>
+      <GruppoMis>SI</GruppoMis>
+      <Ka>1,000</Ka>
+      <Kr>1,000</Kr>
+      <Kp>1,000</Kp>
+    </DatiPdp>
+    <Misura xsi:type="DettaglioMisuraPeriodico2GNRType">
+      <Raccolta>P</Raccolta>
+      <TipoDato>E</TipoDato>
+      <CausaOstativa>SI</CausaOstativa>
+      <Validato>S</Validato>
+      <PotMax>200,000</PotMax>
+      <EaF1>30,000</EaF1>
+      <EaF2>15,000</EaF2>
+      <EaF3>24,998</EaF3>
+      <ErF1>0,785</ErF1>
+      <ErF2>0,765</ErF2>
+      <ErF3>2,466</ErF3>
+      <PotF1>200,000</PotF1>
+      <PotF2>30,000</PotF2>
+      <PotF3>40,000</PotF3>
+    </Misura> 
+  </DatiPod>
+</FlussoMisure>
