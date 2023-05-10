@@ -48,8 +48,6 @@ public class DatiPod {
     protected List<DettaglioMisuraGenericoRType> misura;
     @XmlElement(name = "Consumo")
     protected List<DettaglioConsumoRv2Type> consumo;
-    @XmlAttribute(name = "CodFlusso", required = true)
-    protected String codflusso;
 
     public String getPod() {
         return pod;
@@ -124,12 +122,5 @@ public class DatiPod {
             consumo = new ArrayList<DettaglioConsumoRv2Type>();
         }
         return this.consumo;
-    }
-
-    public String getCodFlusso() {
-        return codflusso;
-    }
-    public void setCodFlusso(String value) {
-        this.codflusso = value;
     }
 }
