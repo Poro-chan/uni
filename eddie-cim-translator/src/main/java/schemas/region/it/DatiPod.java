@@ -45,9 +45,7 @@ public class DatiPod {
     @XmlElement(name = "DatiPdp")
     protected List<DatiPdp2GType> datipdp;
     @XmlElement(name = "Misura")
-    protected List<DettaglioMisuraGenericoRType> misura;
-    @XmlElement(name = "Consumo")
-    protected List<DettaglioConsumoRv2Type> consumo;
+    protected List<DettaglioMisuraRFOv2Type> misura;
 
     public String getPod() {
         return pod;
@@ -115,12 +113,5 @@ public class DatiPod {
             misura = new ArrayList<DettaglioMisuraGenericoRType>();
         }
         return this.misura;
-    }
-
-    public List<DettaglioConsumoRv2Type> getConsumo() {
-        if (consumo == null) {
-            consumo = new ArrayList<DettaglioConsumoRv2Type>();
-        }
-        return this.consumo;
     }
 }
