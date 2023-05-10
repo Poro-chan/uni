@@ -22,7 +22,7 @@ public class IdentificativiFlusso {
     @XmlElement(name = "PIvaDistributore")
     protected int pivadistributore;
     @XmlElement(name = "CodContrDisp")
-    protected string codcontrdisp;
+    protected String codcontrdisp;
 
     public int getPIvaUtente() {
         return pivautente;
@@ -38,7 +38,7 @@ public class IdentificativiFlusso {
         this.pivadistributore = value;
     }
 
-    public int getCodContrDisp() {
+    public String getCodContrDisp() {
         return codcontrdisp;
     }
     public void setCodContrDisp(String value) {
