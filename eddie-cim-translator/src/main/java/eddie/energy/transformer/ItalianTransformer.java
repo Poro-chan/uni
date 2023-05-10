@@ -1,7 +1,8 @@
 package eddie.energy.transformer;
 
 import org.json.simple.parser.ParseException;
-import schemas.eu.MyEnergyDataMarketDocument;
+import schemas.eu.*;
+import schemas.region.it.DettaglioMisuraRFOv2Type;
 import schemas.region.it.FlussoMisureType;
 
 import javax.xml.bind.JAXBContext;
@@ -12,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.text.SimpleDateFormat;
+import java.util.UUID;
 
 public class ItalianTransformer extends AbstractVhcdTransformer{
 
@@ -49,6 +51,38 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
     public MyEnergyDataMarketDocument getMappedMarketDocument() throws java.text.ParseException {
         MyEnergyDataMarketDocument doc = new MyEnergyDataMarketDocument();
 
+        doc.setMRID("Dummy Value");
+        doc.setSenderMarketParticipantMarketRoleType(Integer.toString(consumptionRecord.getIdentificativiFlusso().getPIvaDistributore()));
+        doc.setSenderMarketParticipantName("MDA");
+        doc.setReceiverMarketParticipantMarketRoleType("EP");
+        doc.setReceiverMarketParticipantName(Integer.toString(consumptionRecord.getIdentificativiFlusso().getPIvaUtente()));
+
+        TimeSeries ts = new TimeSeries();
+        ts.setMRID(UUID.randomUUID().toString());
+        ts.setMeasurementUnitName("KWh");
+        ts.setProduct("Electricity");
+
+        String cups = null;
+
+        int position = 1;
+
+        for(DettaglioMisuraRFOv2Type wert : consumptionRecord.getDatiPod().getMisura()) {
+            SeriesPeriod period = new SeriesPeriod();
+
+            ESMPDateTimeInterval intv = new ESMPDateTimeInterval();
+            wert.getEa().get(0);
+            period.setTimeInterval(intv);
+
+            Point point = new Point();
+
+            point.setPosition(position++);
+
+            float qty = Float.parseFloat(wert.getEa().get(0).getE1()); //TODO
+
+            period.getPoint().add(point);
+
+            ts.getPeriod().add(period);
+        }
         return doc;
     }
 }
