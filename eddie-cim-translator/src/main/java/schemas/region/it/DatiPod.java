@@ -98,7 +98,7 @@ public class DatiPod {
 
     public List<DatiPdp2GType> getDatiPdp() {
         if (datipdp == null) {
-            datipdp = new ArrayList<ConsumptionPositionType>();
+            datipdp = new ArrayList<DatiPdp2GType>();
         }
         return this.datipdp;
     }
