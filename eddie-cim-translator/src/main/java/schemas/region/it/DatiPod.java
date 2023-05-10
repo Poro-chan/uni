@@ -41,6 +41,12 @@ public class DatiPod {
     protected String codpratsii;
     @XmlElement(name = "DatiPdp")
     protected List<DatiPdp2GType> datipdp;
+    @XmlElement(name = "Misura")
+    protected List<DettaglioMisuraGenericoRType> misura;
+    @XmlElement(name = "Consumo")
+    protected List<DettaglioConsumoRv2Type> consumo;
+    @XmlAttribute(name = "CodFlusso", required = true)
+    protected String codflusso;
 
     public String getPod() {
         return pod;
@@ -101,5 +107,26 @@ public class DatiPod {
             datipdp = new ArrayList<DatiPdp2GType>();
         }
         return this.datipdp;
+    }
+
+    public List<DettaglioMisuraGenericoRType> getMisura() {
+        if (misura == null) {
+            misura = new ArrayList<DettaglioMisuraGenericoRType>();
+        }
+        return this.misura;
+    }
+
+    public List<DettaglioConsumoRv2Type> getConsumo() {
+        if (consumo == null) {
+            consumo = new ArrayList<DettaglioConsumoRv2Type>();
+        }
+        return this.consumo;
+    }
+
+    public String getCodFlusso() {
+        return codflusso;
+    }
+    public void setCodFlusso(String value) {
+        this.codflusso = value;
     }
 }
