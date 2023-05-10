@@ -14,6 +14,8 @@ public class FlussoMisureType {
     protected IdentificativiFlussoType identificativiFlusso;
     @XmlElement(name = "DatiPod", required = true)
     protected DatiPod datiPod;
+    @XmlAttribute(name = "CodFlusso",required = true)
+    protected String codFlusso;
 
     public IdentificativiFlussoType getIdentificativiFlusso() {
         return identificativiFlusso;
@@ -29,5 +31,13 @@ public class FlussoMisureType {
 
     public void setDatiPod(DatiPod datiPod) {
         this.datiPod = datiPod;
+    }
+
+    public String getCodFlusso() {
+        return codFlusso;
+    }
+
+    public void setCodFlusso(String codFlusso) {
+        this.codFlusso = codFlusso;
     }
 }
