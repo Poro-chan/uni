@@ -18,7 +18,7 @@ public class DettaglioMisuraRFOv2Type {
 
     @XmlElement(name = "PotMax")
     protected String potmax;
-    @XmlElement(name = 'Ea')
+    @XmlElement(name = "Ea")
     protected String ea;
 
     public String getPotMax() {
