@@ -35,7 +35,7 @@ public class DatiPod {
     @XmlElement(name = "CodPrat_SII")
     protected String codpratsii;
     @XmlElement(name = "DatiPdp")
-    protected String datipdp;
+    protected List<DatiPdp2GType> datipdp;
 
     public String getPod() {
         return pod;
@@ -77,5 +77,24 @@ public class DatiPod {
     }
     public void setMotivazione(String value) {
         this.motivazione = value;
+    }
+    public String getDataPrest() {
+        return dataprest;
+    }
+    public void setDataPreste(String value) {
+        this.dataprest = value;
+    }
+    public String getCodPrat_SII() {
+        return codpratsii;
+    }
+    public void setCodPrat_SII(String value) {
+        this.codpratsii = value;
+    }
+
+    public List<DatiPdp2GType> getDatiPdp() {
+        if (datipdp == null) {
+            datipdp = new ArrayList<ConsumptionPositionType>();
+        }
+        return this.datipdp;
     }
 }

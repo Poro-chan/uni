@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlType;
     "CodContrDisp"
 })
 
-public class IdentificativiFlusso {
+public class IdentificativiFlussoType {
 
     @XmlElement(name = "PIvaUtente")
     protected int pivautente;
