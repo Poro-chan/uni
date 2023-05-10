@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DettaglioMisuraRFOv2Type", propOrder = {
-    "CausaOstativa",
-    "PotMax"
+    "PotMax",
+    "Ea"
 })
 
 public class DettaglioMisuraRFOv2Type {
@@ -19,7 +19,7 @@ public class DettaglioMisuraRFOv2Type {
     @XmlElement(name = "PotMax")
     protected String potmax;
     @XmlElement(name = "Ea")
-    protected String ea;
+    protected List<EnergiaType> ea;
 
     public String getPotMax() {
         return potmax;
@@ -28,11 +28,10 @@ public class DettaglioMisuraRFOv2Type {
         this.potmax = value;
     }
 
-    public String getEa() {
-        return ea;
-    }
-
-    public void setEa(String value) {
-        this.ea = value;
+    public List<EnergiaType> getEa() {
+        if (ea == null) {
+            ea = new ArrayList<EnergiaType>();
+        }
+        return this.ea;
     }
 }

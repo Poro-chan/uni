@@ -108,9 +108,9 @@ public class DatiPod {
         return this.datipdp;
     }
 
-    public List<DettaglioMisuraGenericoRType> getMisura() {
+    public List<DettaglioMisuraRFOv2Type> getMisura() {
         if (misura == null) {
-            misura = new ArrayList<DettaglioMisuraGenericoRType>();
+            misura = new ArrayList<DettaglioMisuraRFOv2Type>();
         }
         return this.misura;
     }
