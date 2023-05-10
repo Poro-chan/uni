@@ -18,7 +18,10 @@ import javax.xml.bind.annotation.XmlType;
     "Motivazione",
     "DataPrest",
     "CodPrat_SII",
-    "DatiPdp"
+    "DatiPdp",
+    "Misura",
+    "Consumo",
+    "CodFlusso"
 })
 
 public class DatiPod {
