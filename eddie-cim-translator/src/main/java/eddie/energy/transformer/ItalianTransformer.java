@@ -77,64 +77,66 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
         int help = 1;
 
         for(EnergiaType wert : consumptionRecord.getDatiPod().getMisura().getEa()) {
+            while(help < 97) {
+                SeriesPeriod period = new SeriesPeriod();
 
-            SeriesPeriod period = new SeriesPeriod();
+                ESMPDateTimeInterval intv = new ESMPDateTimeInterval();
 
-            ESMPDateTimeInterval intv = new ESMPDateTimeInterval();
+                //Get end and start times as string
+                String starttime = "";
+                String endtime = "";
+                if(starthour < 10) {
+                    starttime = "0";
+                }
+                if(start == 0) {
+                    starttime = starttime + starthour.toString() + ":0" + start.toString();
+                }
+                else {
+                    starttime = starttime + starthour.toString() + ':' + start.toString();
+                }
+                if(endhour < 10) {
+                    endtime = "0";
+                }
+                if(end == 0) {
+                    endtime = endtime + endhour.toString() + ":0" + end.toString();
+                }
+                else {
+                    endtime = endtime + endhour + ':' + end;
+                }
 
-            //Get end and start times as string
-            String starttime = "";
-            String endtime = "";
-            if(starthour < 10) {
-                starttime = "0";
+                //Set end and start times
+                intv.setStart(starttime);
+                intv.setEnd(endtime);
+                period.setTimeInterval(intv);
+
+                //Get new end and start times for the data
+                start += 15;
+                end += 15;
+                if(start == 60) {
+                    start = 0;
+                    starthour +=1;
+                }
+                if(end == 60) {
+                    end = 0;
+                    endhour += 1;
+                }
+
+                Point point = new Point();
+                point.setPosition(position++);
+
+                String name = "getE" + help;
+                String value = wert.getClass().getMethod(name).invoke(wert);
+                value = value.replace(',', '.');
+
+                float qty = Float.parseFloat(value);
+
+                point.setOutQuantityQuantity(BigDecimal.valueOf(qty));
+
+                period.getPoint().add(point);
+
+                ts.getPeriod().add(period);
+                help++;
             }
-            if(start == 0) {
-                starttime = starttime + starthour.toString() + ":0" + start.toString();
-            }
-            else {
-                starttime = starttime + starthour.toString() + ':' + start.toString();
-            }
-            if(endhour < 10) {
-                endtime = "0";
-            }
-            if(end == 0) {
-                endtime = endtime + endhour.toString() + ":0" + end.toString();
-            }
-            else {
-                endtime = endtime + endhour + ':' + end;
-            }
-
-            //Set end and start times
-            intv.setStart(starttime);
-            intv.setEnd(endtime);
-            period.setTimeInterval(intv);
-
-            //Get new end and start times for the data
-            start += 15;
-            end += 15;
-            if(start == 60) {
-                start = 0;
-                starthour +=1;
-            }
-            if(end == 60) {
-                end = 0;
-                endhour += 1;
-            }
-
-            Point point = new Point();
-            point.setPosition(position++);
-
-            String name = "getE" + help;
-            String value = wert.getClass().getMethod(name).invoke(wert);
-
-            float qty = Float.parseFloat(value); //TODO fertig??
-
-            point.setOutQuantityQuantity(BigDecimal.valueOf(qty));
-
-            period.getPoint().add(point);
-
-            ts.getPeriod().add(period);
-            help += 1;
         }
 
         MeasurementPointIDString mpid = new MeasurementPointIDString();
