@@ -10,8 +10,8 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DettaglioMisuraRFOv2Type", propOrder = {
-    "PotMax",
-    "Ea"
+    "potmax",
+    "ea"
 })
 
 public class DettaglioMisuraRFOv2Type {
