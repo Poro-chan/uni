@@ -74,13 +74,9 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
         Integer endhour = 0;
         Integer start = 0;
         Integer end = 15;
-        int help = 0;
+        int help = 1;
 
         for(EnergiaType wert : consumptionRecord.getDatiPod().getMisura().getEa()) {
-            if(help == 0) {
-                help += 1;
-                continue;
-            }
 
             SeriesPeriod period = new SeriesPeriod();
 
