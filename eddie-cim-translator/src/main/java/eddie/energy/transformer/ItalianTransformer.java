@@ -76,7 +76,7 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
         Integer end = 15;
         int help = 1;
 
-        for(EnergiaType wert : consumptionRecord.getDatiPod().getMisura().getEa()) {
+        for(EnergiaType wert : consumptionRecord.getDatiPod().getMisura().get(0).getEa()) {
             while(help < 97) {
                 SeriesPeriod period = new SeriesPeriod();
 
@@ -125,7 +125,7 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
                 point.setPosition(position++);
 
                 String name = "getE" + help;
-                String value = wert.getClass().getMethod(name).invoke(wert);
+                String value = (String) wert.getClass().getMethod(name).invoke(wert);
                 value = value.replace(',', '.');
 
                 float qty = Float.parseFloat(value);
