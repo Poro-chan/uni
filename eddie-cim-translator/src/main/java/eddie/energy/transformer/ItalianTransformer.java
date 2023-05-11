@@ -129,7 +129,7 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
             point.setPosition(position++);
 
             String name = "getE" + help;
-            String value = wert.getClass()getMethod(name).invoke(wert);
+            String value = wert.getClass().getMethod(name).invoke(wert);
 
             float qty = Float.parseFloat(value); //TODO fertig??
 
