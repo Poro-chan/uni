@@ -128,10 +128,10 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
             Point point = new Point();
             point.setPosition(position++);
 
-            //String name = "getE" + help;
-            //Method method = EnergiaType.class.getDeclaredMethod(name, null);
+            String name = "getE" + help;
+            String value = wert.getClass()getMethod(name).invoke(wert);
 
-            float qty = Float.parseFloat(wert.get(help)); //TODO fertig??
+            float qty = Float.parseFloat(value); //TODO fertig??
 
             point.setOutQuantityQuantity(BigDecimal.valueOf(qty));
 
