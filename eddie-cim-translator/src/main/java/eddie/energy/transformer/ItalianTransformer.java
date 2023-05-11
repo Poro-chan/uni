@@ -71,12 +71,17 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
         int endhour = 0;
         int start = 0;
         int end = 15;
+        int help = 0;
 
-        for(DettaglioMisuraRFOv2Type wert : consumptionRecord.getDatiPod().getMisura()) {
+        for(EnergiaType wert : consumptionRecord.getDatiPod().getMisura().getEa().get(1)) {
+            if(help = 0) {
+                help += 1;
+                continue;
+            }
+
             SeriesPeriod period = new SeriesPeriod();
 
             ESMPDateTimeInterval intv = new ESMPDateTimeInterval();
-            wert.getEa().get(1);
 
             //Get end and start times as string
             String starttime = ''
@@ -120,10 +125,10 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
             Point point = new Point();
             point.setPosition(position++);
 
-            String function name = "getE" + wert;
+            String name = "getE" + help.toString();
             Method method = Main.class.getDeclaredMethod(name);
 
-            float qty = Float.parseFloat(wert.getEa().get(1).method.invoke(); //TODO fertig??
+            float qty = Float.parseFloat(wert.method.invoke(); //TODO fertig??
 
             period.getPoint().add(point);
 
