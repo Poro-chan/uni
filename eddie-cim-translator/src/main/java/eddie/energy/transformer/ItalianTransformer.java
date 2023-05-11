@@ -128,28 +128,29 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
             point.setPosition(position++);
 
             String name = "getE" + help;
-            Method method = EnergiaDataType.class.getDeclaredMethod(name, null);
+            Method method = EnergiaType.class.getDeclaredMethod(name, null);
 
-            float qty = Float.parseFloat(method.invoke(EnergiaDataType, null); //TODO fertig??
+            float qty = Float.parseFloat(method.invoke(null, ""); //TODO fertig??
 
             if(qty < 0) {
                 point.setOutQuantityQuantity(BigDecimal.valueOf(qty*-1));
-                point.setOutQuantityQuality(ct.getMeteringMethod()); // TODO normalise values
+                point.setOutQuantityQuality();
             } else {
                 point.setOutQuantityQuantity(BigDecimal.valueOf(qty));
-                point.setOutQuantityQuality(ct.getMeteringMethod()); // TODO normalise values
+                point.setOutQuantityQuality();
             }
 
             period.getPoint().add(point);
 
             ts.getPeriod().add(period);
+            help += 1;
         }
 
         MeasurementPointIDString mpid = new MeasurementPointIDString();
         mpid.setCodingScheme("ITCode");
-        mpid.setValue(consumptionRecord.getDatiPod().getPod()); //TODO fertig??
+        mpid.setValue(consumptionRecord.getDatiPod().getPod());
         MarketEvaluationPoint ep = new MarketEvaluationPoint();
-        ep.setMRID(mpid); //TODO
+        ep.setMRID(mpid);
         ts.getMarketEvaluationPoint().add(ep);
 
         doc.getTimeSeries().add(ts);
