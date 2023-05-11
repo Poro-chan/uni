@@ -134,6 +134,7 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
             period.getPoint().add(point);
 
             ts.getPeriod().add(period);
+            help += 1;
         }
 
         MeasurementPointIDString mpid = new MeasurementPointIDString();
