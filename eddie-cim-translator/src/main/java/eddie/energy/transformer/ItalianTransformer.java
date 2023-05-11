@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
+import java.lang.reflect.Method;
 
 public class ItalianTransformer extends AbstractVhcdTransformer{
 
@@ -66,23 +67,71 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
 
         int position = 1;
 
+        int starthour = 00;
+        int endhour = 00;
+        int start = 00;
+        int end = 15;
+
         for(DettaglioMisuraRFOv2Type wert : consumptionRecord.getDatiPod().getMisura()) {
             SeriesPeriod period = new SeriesPeriod();
 
             ESMPDateTimeInterval intv = new ESMPDateTimeInterval();
             wert.getEa().get(0);
+
+            //Get end and start times as string
+            String starttime = ''
+            String endtime = ''
+            if(starthour < 10) {
+                starttime = '0' + starthour.toString() + ':' + start.toString();
+            }
+            else {
+                starttime = starthour.toString() + ':' + start.toString();
+            }
+            if(endhour < 10) {
+                endtime = '0' + endhour.toString() + ':' + start.toString();
+            }
+            else {
+                endtime = endhour.toString() + ':' + start.toString();
+            }
+
+            //Set end and start times
+            intv.setStart(starttime);
+            intv.setEnd(endtime);
             period.setTimeInterval(intv);
 
-            Point point = new Point();
+            //Get new end and start times
+            start += 15;
+            end += 15;
+            if(start == 60) {
+                start = 00;
+                starthour +=1;
+            }
+            if(end == 60) {
+                end = 00;
+                endhour += 1;
+            }
 
+            Point point = new Point();
             point.setPosition(position++);
 
-            float qty = Float.parseFloat(wert.getEa().get(0).getE1()); //TODO
+            String function name = "getE" + wert;
+            Method method = Main.class.getDeclaredMethod(name);
+
+            float qty = Float.parseFloat(wert.getEa().get(0).method.invoke(); //TODO fertig??
 
             period.getPoint().add(point);
 
             ts.getPeriod().add(period);
         }
+
+        MeasurementPointIDString mpid = new MeasurementPointIDString();
+        mpid.setCodingScheme("ITCode");
+        mpid.setValue(consumptionRecord.getDatiPod().getPod(); //TODO fertig??
+        MarketEvaluationPoint ep = new MarketEvaluationPoint();
+        ep.setMRID(mpid); //TODO
+        ts.getMarketEvaluationPoint().add(ep);
+
+        doc.getTimeSeries().add(ts);
         return doc;
     }
 }
