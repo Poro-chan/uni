@@ -10,12 +10,12 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DatiPdp2GType", propOrder = {
-    "Trattamento",
-    "Tensione",
-    "Forfait",
-    "Ka",
-    "Kr",
-    "Kp"
+    "trattamento",
+    "tensione",
+    "forfait",
+    "ka",
+    "kr",
+    "kp"
 })
 
 public class DatiPdp2GType {

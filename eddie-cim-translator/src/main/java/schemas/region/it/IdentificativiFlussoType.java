@@ -10,9 +10,9 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IdentificativiFlussoType", propOrder = {
-    "PIvaUtente",
-    "PIvaDistributore",
-    "CodContrDisp"
+    "pivautente",
+    "pivadistributore",
+    "codcontrdisp"
 })
 
 public class IdentificativiFlussoType {

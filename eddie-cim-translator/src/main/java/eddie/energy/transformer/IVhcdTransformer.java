@@ -6,6 +6,7 @@ import javax.xml.bind.JAXBException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 
 public interface IVhcdTransformer {
@@ -14,10 +15,10 @@ public interface IVhcdTransformer {
 
     public void loadReceivedData(String receivedData) throws JAXBException, org.json.simple.parser.ParseException;
 
-    public MyEnergyDataMarketDocument getMappedMarketDocument(File file) throws JAXBException, IOException, ParseException, org.json.simple.parser.ParseException;
+    public MyEnergyDataMarketDocument getMappedMarketDocument(File file) throws JAXBException, IOException, ParseException, org.json.simple.parser.ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 
-    public MyEnergyDataMarketDocument getMappedMarketDocument(String receivedData) throws JAXBException, ParseException, org.json.simple.parser.ParseException;
+    public MyEnergyDataMarketDocument getMappedMarketDocument(String receivedData) throws JAXBException, ParseException, org.json.simple.parser.ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 
-    public MyEnergyDataMarketDocument getMappedMarketDocument() throws ParseException;
+    public MyEnergyDataMarketDocument getMappedMarketDocument() throws ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException;
 
 }

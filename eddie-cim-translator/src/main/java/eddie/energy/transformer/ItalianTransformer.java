@@ -3,6 +3,7 @@ package eddie.energy.transformer;
 import org.json.simple.parser.ParseException;
 import schemas.eu.*;
 import schemas.region.it.DettaglioMisuraRFOv2Type;
+import schemas.region.it.EnergiaType;
 import schemas.region.it.FlussoMisureType;
 
 import javax.xml.bind.JAXBContext;
@@ -10,13 +11,13 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.StringReader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
-import java.lang.reflect.Method;
 
 public class ItalianTransformer extends AbstractVhcdTransformer{
 
@@ -25,7 +26,7 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
     final Unmarshaller italianContextUnmarshaller = italianContext.createUnmarshaller();
     final SimpleDateFormat italianDateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
-    protected ItalianTransformer() throws JAXBException {
+    public ItalianTransformer() throws JAXBException {
     }
 
     @Override
@@ -39,19 +40,19 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
     }
 
     @Override
-    public MyEnergyDataMarketDocument getMappedMarketDocument(File file) throws JAXBException, IOException, java.text.ParseException, ParseException {
+    public MyEnergyDataMarketDocument getMappedMarketDocument(File file) throws JAXBException, IOException, java.text.ParseException, ParseException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         loadFromFile(file);
         return getMappedMarketDocument();
     }
 
     @Override
-    public MyEnergyDataMarketDocument getMappedMarketDocument(String receivedData) throws JAXBException, java.text.ParseException, ParseException {
+    public MyEnergyDataMarketDocument getMappedMarketDocument(String receivedData) throws JAXBException, java.text.ParseException, ParseException, InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         loadReceivedData(receivedData);
         return getMappedMarketDocument();
     }
 
     @Override
-    public MyEnergyDataMarketDocument getMappedMarketDocument() throws java.text.ParseException {
+    public MyEnergyDataMarketDocument getMappedMarketDocument() throws java.text.ParseException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         MyEnergyDataMarketDocument doc = new MyEnergyDataMarketDocument();
 
         doc.setMRID("MRID");
@@ -86,8 +87,8 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
             ESMPDateTimeInterval intv = new ESMPDateTimeInterval();
 
             //Get end and start times as string
-            String starttime;
-            String endtime;
+            String starttime = "";
+            String endtime = "";
             if(starthour < 10) {
                 starttime = "0";
             }
@@ -104,7 +105,7 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
                 endtime = endtime + endhour.toString() + ":0" + end.toString();
             }
             else {
-                endtime = endtime + endhour.toString() + ':' + end.toString();
+                endtime = endtime + endhour + ':' + end;
             }
 
             //Set end and start times
@@ -128,17 +129,11 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
             point.setPosition(position++);
 
             String name = "getE" + help;
-            Method method = EnergiaDataType.class.getDeclaredMethod(name, null);
+            Method method = EnergiaType.class.getDeclaredMethod(name, null);
 
-            float qty = Float.parseFloat(method.invoke(EnergiaDataType, null); //TODO fertig??
+            float qty = Float.parseFloat((String) method.invoke(null, null)); //TODO fertig??
 
-            if(qty < 0) {
-                point.setOutQuantityQuantity(BigDecimal.valueOf(qty*-1));
-                point.setOutQuantityQuality(ct.getMeteringMethod()); // TODO normalise values
-            } else {
-                point.setOutQuantityQuantity(BigDecimal.valueOf(qty));
-                point.setOutQuantityQuality(ct.getMeteringMethod()); // TODO normalise values
-            }
+            point.setOutQuantityQuantity(BigDecimal.valueOf(qty));
 
             period.getPoint().add(point);
 
