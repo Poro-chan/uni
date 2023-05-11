@@ -113,7 +113,7 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
             intv.setEnd(endtime);
             period.setTimeInterval(intv);
 
-            //Get new end and start times
+            //Get new end and start times for the data
             start += 15;
             end += 15;
             if(start == 60) {
