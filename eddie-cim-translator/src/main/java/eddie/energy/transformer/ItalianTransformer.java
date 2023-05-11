@@ -76,7 +76,7 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
         Integer end = 15;
         int help = 0;
 
-        for(EnergiaType wert : consumptionRecord.getDatiPod().getMisura().getEa()) {
+        for(DettaglioMisuraRFOv2Type wert : consumptionRecord.getDatiPod().getMisura()) {
             if(help == 0) {
                 help += 1;
                 continue;
@@ -128,10 +128,10 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
             Point point = new Point();
             point.setPosition(position++);
 
-            //String name = "getE" + help;
-            //Method method = EnergiaType.class.getDeclaredMethod(name, null);
+            String name = "getE" + help;
+            Method method = EnergiaType.class.getDeclaredMethod(name, null);
 
-            float qty = Float.parseFloat(wert.get(help)); //TODO fertig??
+            float qty = Float.parseFloat((String) method.invoke(null, null)); //TODO fertig??
 
             point.setOutQuantityQuantity(BigDecimal.valueOf(qty));
 
