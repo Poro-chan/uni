@@ -310,14 +310,14 @@
                     <ns0:DateTimeTo>2021-03-24T10:15:00+01:00</ns0:DateTimeTo>
                     <ns0:MeteringMethod>L2</ns0:MeteringMethod>
                     <ns0:BillingUOM>KWH</ns0:BillingUOM>
-                    <ns0:BillingQuantity>0.500000</ns0:BillingQuantity>
+                    <ns0:BillingQuantity>0.450000</ns0:BillingQuantity>
                 </ns0:ConsumptionPosition>
                 <ns0:ConsumptionPosition>
                     <ns0:DateTimeFrom>2021-03-24T10:15:00+01:00</ns0:DateTimeFrom>
                     <ns0:DateTimeTo>2021-03-24T10:30:00+01:00</ns0:DateTimeTo>
                     <ns0:MeteringMethod>L2</ns0:MeteringMethod>
                     <ns0:BillingUOM>KWH</ns0:BillingUOM>
-                    <ns0:BillingQuantity>0.500000</ns0:BillingQuantity>
+                    <ns0:BillingQuantity>0.520000</ns0:BillingQuantity>
                 </ns0:ConsumptionPosition>
                 <ns0:ConsumptionPosition>
                     <ns0:DateTimeFrom>2021-03-24T10:30:00+01:00</ns0:DateTimeFrom>
@@ -331,7 +331,7 @@
                     <ns0:DateTimeTo>2021-03-24T11:00:00+01:00</ns0:DateTimeTo>
                     <ns0:MeteringMethod>L2</ns0:MeteringMethod>
                     <ns0:BillingUOM>KWH</ns0:BillingUOM>
-                    <ns0:BillingQuantity>0.500000</ns0:BillingQuantity>
+                    <ns0:BillingQuantity>0.200000</ns0:BillingQuantity>
                 </ns0:ConsumptionPosition>
                 <ns0:ConsumptionPosition>
                     <ns0:DateTimeFrom>2021-03-24T11:00:00+01:00</ns0:DateTimeFrom>

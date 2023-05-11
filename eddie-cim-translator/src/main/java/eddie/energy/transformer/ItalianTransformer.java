@@ -10,8 +10,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.StringReader;
+import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 import java.lang.reflect.Method;
@@ -67,14 +69,14 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
 
         int position = 1;
 
-        int starthour = 0;
-        int endhour = 0;
-        int start = 0;
-        int end = 15;
+        Integer starthour = 0;
+        Integer endhour = 0;
+        Integer start = 0;
+        Integer end = 15;
         int help = 0;
 
-        for(EnergiaType wert : consumptionRecord.getDatiPod().getMisura().getEa().get(1)) {
-            if(help = 0) {
+        for(DettaglioMisuraRFOv2Type wert : consumptionRecord.getDatiPod().getMisura()) {
+            if(help == 0) {
                 help += 1;
                 continue;
             }
@@ -84,22 +86,22 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
             ESMPDateTimeInterval intv = new ESMPDateTimeInterval();
 
             //Get end and start times as string
-            String starttime = ''
-            String endtime = ''
+            String starttime;
+            String endtime;
             if(starthour < 10) {
-                starttime = '0';
+                starttime = "0";
             }
             if(start == 0) {
-                starttime = starttime + starthour.toString() + ':0' + start.toString();
+                starttime = starttime + starthour.toString() + ":0" + start.toString();
             }
             else {
                 starttime = starttime + starthour.toString() + ':' + start.toString();
             }
             if(endhour < 10) {
-                endtime = '0';
+                endtime = "0";
             }
             if(end == 0) {
-                endtime = endtime + endhour.toString() + ':0' + end.toString();
+                endtime = endtime + endhour.toString() + ":0" + end.toString();
             }
             else {
                 endtime = endtime + endhour.toString() + ':' + end.toString();
@@ -126,9 +128,17 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
             point.setPosition(position++);
 
             String name = "getE" + help;
-            Method method = Main.class.getDeclaredMethod(name, null);
+            Method method = EnergiaDataType.class.getDeclaredMethod(name, null);
 
-            float qty = Float.parseFloat(wert.method.invoke(); //TODO fertig??
+            float qty = Float.parseFloat(method.invoke(EnergiaDataType, null); //TODO fertig??
+
+            if(qty < 0) {
+                point.setOutQuantityQuantity(BigDecimal.valueOf(qty*-1));
+                point.setOutQuantityQuality(ct.getMeteringMethod()); // TODO normalise values
+            } else {
+                point.setOutQuantityQuantity(BigDecimal.valueOf(qty));
+                point.setOutQuantityQuality(ct.getMeteringMethod()); // TODO normalise values
+            }
 
             period.getPoint().add(point);
 
@@ -137,7 +147,7 @@ public class ItalianTransformer extends AbstractVhcdTransformer{
 
         MeasurementPointIDString mpid = new MeasurementPointIDString();
         mpid.setCodingScheme("ITCode");
-        mpid.setValue(consumptionRecord.getDatiPod().getPod(); //TODO fertig??
+        mpid.setValue(consumptionRecord.getDatiPod().getPod()); //TODO fertig??
         MarketEvaluationPoint ep = new MarketEvaluationPoint();
         ep.setMRID(mpid); //TODO
         ts.getMarketEvaluationPoint().add(ep);
