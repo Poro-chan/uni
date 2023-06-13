@@ -71,7 +71,7 @@ d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_data
 
 });*/
 const margin_l = {top: 10, right: 30, bottom: 90, left: 40},
-    width_l = 460 - margin_l.left - margin_l.right,
+    width_l = 1500 - margin_l.left - margin_l.right,
     height_l = 500 - margin_l.top - margin_l.bottom;
 
 // append the svg object to the body of the page
@@ -83,12 +83,12 @@ const svg_l = d3.select("#lollipop")
     .attr("transform", `translate(${margin_l.left},${margin_l.top})`);
 
 // Parse the Data
-d3.csv("https://raw.githubusercontent.com/holtzy/data_to_viz/master/Example_dataset/7_OneCatOneNum_header.csv").then( function(data) {
+d3.csv("data.csv").then( function(data) {
 
 // X axis
 const x = d3.scaleBand()
   .range([ 0, width_l ])
-  .domain(data.map(function(d) { return d.Country; }))
+  .domain(data.map(function(d) { return d.Timestamp; }))
   .padding(1);
 svg_l.append("g")
   .attr("transform", `translate(0, ${height_l})`)
@@ -99,7 +99,7 @@ svg_l.append("g")
 
 // Add Y axis
 const y = d3.scaleLinear()
-  .domain([0, 13000])
+  .domain([0, 5])
   .range([ height_l, 0]);
 svg_l.append("g")
   .call(d3.axisLeft(y));
@@ -109,9 +109,9 @@ svg_l.selectAll("myline")
   .data(data)
   .enter()
   .append("line")
-    .attr("x1", function(d) { return x(d.Country); })
-    .attr("x2", function(d) { return x(d.Country); })
-    .attr("y1", function(d) { return y(d.Value); })
+    .attr("x1", function(d) { return x(d.Timestamp); })
+    .attr("x2", function(d) { return x(d.Timestamp); })
+    .attr("y1", function(d) { return y(d.Consumption); })
     .attr("y2", y(0))
     .attr("stroke", "grey")
 
@@ -119,8 +119,8 @@ svg_l.selectAll("myline")
 svg_l.selectAll("mycircle")
   .data(data)
   .join("circle")
-    .attr("cx", function(d) { return x(d.Country); })
-    .attr("cy", function(d) { return y(d.Value); })
+    .attr("cx", function(d) { return x(d.Timestamp); })
+    .attr("cy", function(d) { return y(d.Consumption); })
     .attr("r", "4")
     .style("fill", "#69b3a2")
     .attr("stroke", "black")

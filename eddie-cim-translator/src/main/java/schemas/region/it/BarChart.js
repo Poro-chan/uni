@@ -60,6 +60,10 @@ function show_plt(){
     return svg.node();
 }
 
+function show_test(){
+    document.getElementById("1").innerHTML+="Irgendwos Tuschek"
+}
+
 
 
 Plot.plot({
