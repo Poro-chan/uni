@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Asap&family=Roboto:ital,wght@0,500;0,900;1,500&display=swap");
+body {
+
+  font-family: "Asap", sans-serif;
+  background-color: #fdfdfe;
+}
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  padding: 50px;
+  text-align: center;
+}
+header h1 {
+  position: absolute;
+  width: 90%;
+  font-size: 60px;
+  font-weight: 600;
+  color: transparent;
+  background-image: linear-gradient(to right ,#553c9a, #ee4b2b, #00c2cb, #ff7f50, #553c9a);
+  -webkit-background-clip: text;
+  background-clip: text;    
+  background-size: 200%;
+  background-position: -200%;
+  animation: animated-gradient 2s infinite alternate-reverse;
+  
+
+}
+@keyframes animated-gradient{
+  to{
+    background-position: 10%;
+  }
+}
+
+.lollipop_paragraph{
+    font-size: larger;
+}
+
+
+
+.lollipop{
+    padding:50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+.line_paragraph{
+    font-size: larger;
+}
+
+.line{
+    padding:50px;
+    padding-top: 10px;
+}
